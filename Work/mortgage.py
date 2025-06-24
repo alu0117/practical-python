@@ -12,6 +12,7 @@ extra_payment_start_month = 61
 extra_payment_end_month = 108
 extra_payment = 1000
 
+print(f'{'Month':<10}{'Principal':<15}{'Total Paid':<10}')
 while month <= months:
     principal = principal*(1+rate/12)
     if month >= extra_payment_start_month and month <= extra_payment_end_month:
@@ -25,7 +26,7 @@ while month <= months:
             break
         total_paid = total_paid + payment
    
-    print(month, round(total_paid,2), round(principal,2))
+    print(f'{month:<10}{round(total_paid,2):<15}{round(principal,2):<10}')
     month += 1
 
 print('Total paid', round(total_paid,2))
