@@ -1,18 +1,24 @@
 # pcost.py
 #
 # Exercise 1.27
+def portfolio_cost(filename):
+    f = open(filename, 'rt')
+    next(f) # skip headers
+    cost = 0
+    for line in f:
+        # convert line to list
+        row =  line.split(',')
+        # extract number of shares
+        shares = int(row[1])
+        #extract price
+        price = float(row[2])
+        total = shares*price
+        cost += total
+    f.close()
+    return cost
+
 path = 'Data/portfolio.csv'
-f = open(path, 'rt')
-headers = next(f) # skip headers
-cost = 0
-for line in f:
-    # convert line to list
-    row =  line.split(',')
-    # extract number of shares
-    shares = int(row[1])
-    #extract price
-    price = float(row[2])
-    total = shares*price
-    cost += total
-print('Total cost', cost)
-f.close()
+total_cost = portfolio_cost(path)
+
+print('Total cost', total_cost)
+
