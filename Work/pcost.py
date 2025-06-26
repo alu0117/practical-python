@@ -1,13 +1,13 @@
 # pcost.py
 #
 # Exercise 1.27
+import csv
 def portfolio_cost(filename):
     f = open(filename, 'rt')
-    next(f) # skip headers
+    rows = csv.reader(f)
+    next(rows) # skip headers
     cost = 0
-    for line in f:
-        # convert line to list
-        row =  line.split(',')
+    for row in rows:
         # extract number of shares
         try:
             shares = int(row[1])
