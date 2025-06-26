@@ -9,9 +9,12 @@ def portfolio_cost(filename):
         # convert line to list
         row =  line.split(',')
         # extract number of shares
-        shares = int(row[1])
-        #extract price
-        price = float(row[2])
+        try:
+            shares = int(row[1])
+            #extract price
+            price = float(row[2])
+        except ValueError:
+            print("Warning: Missing Field")
         total = shares*price
         cost += total
     f.close()
