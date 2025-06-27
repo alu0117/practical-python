@@ -24,3 +24,14 @@ def read_prices(filename):
     f.close()
     return d
     
+def current_value(portfolio, stocks):
+    value = 0
+    change = 0
+    for holding in portfolio:
+        stock_name = holding['name']
+        cur_price = stocks[stock_name]
+        value += holding['shares'] * cur_price
+
+        # Calculate gains/loss
+        change += (cur_price - holding['price']) * holding['shares']
+    return value, change
