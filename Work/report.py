@@ -23,7 +23,17 @@ def read_prices(filename):
             print('Row is empty')
     f.close()
     return d
-    
+
+def make_report(port, cur_prices):
+    holdings = []
+    for p in port:
+        buy_price = p['price']
+        cur_price = cur_prices[p['name']]
+        change = cur_price-buy_price
+        tup  = (p['name'], p['shares'], cur_price, change)
+        holdings.append(tup)
+    return holdings
+
 def current_value(portfolio, stocks):
     value = 0
     change = 0
