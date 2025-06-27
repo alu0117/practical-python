@@ -45,3 +45,9 @@ def current_value(portfolio, stocks):
         # Calculate gains/loss
         change += (cur_price - holding['price']) * holding['shares']
     return value, change
+
+portfolio = read_portfolio('Data/portfolio.csv')
+prices = read_prices('Data/prices.csv')
+report = make_report(portfolio, prices)
+for name, shares, price, change in report:
+    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
