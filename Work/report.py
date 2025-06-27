@@ -46,8 +46,20 @@ def current_value(portfolio, stocks):
         change += (cur_price - holding['price']) * holding['shares']
     return value, change
 
+def format_header(tup):
+    for header in tup:
+        print(f'{header:>10s}', end = ' ')
+    print()
+    for _ in tup:
+        print('-'*10, end=' ')
+    print()
+
 portfolio = read_portfolio('Data/portfolio.csv')
 prices = read_prices('Data/prices.csv')
 report = make_report(portfolio, prices)
+
+headers = ('Name', 'Shares', 'Price', 'Change')
+format_header(headers)
+
 for name, shares, price, change in report:
     print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
