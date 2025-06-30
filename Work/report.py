@@ -55,15 +55,17 @@ def format_header(tup):
         print('-'*10, end=' ')
     print()
 
+def print_report(report):
+    headers = ('Name', 'Shares', 'Price', 'Change')
+    format_header(headers)
+
+    for name, shares, price, change in report:
+        formatted_price = f'${price:<.2f}'
+        print(f'{name:>10s} {shares:>10d} {formatted_price:>10s} {change:>10.2f}')
+        
 # Script begins here
 
 portfolio = read_portfolio('Data/portfolio.csv')
 prices = read_prices('Data/prices.csv')
 report = make_report(portfolio, prices)
-
-headers = ('Name', 'Shares', 'Price', 'Change')
-format_header(headers)
-
-for name, shares, price, change in report:
-    formatted_price = f'${price:<.2f}'
-    print(f'{name:>10s} {shares:>10d} {formatted_price:>10s} {change:>10.2f}')
+print_report(report)
