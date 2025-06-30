@@ -7,18 +7,19 @@ import sys
 def portfolio_cost(filename):
     f = open(filename, 'rt')
     rows = csv.reader(f)
-    next(rows) # skip headers
+    headers = next(rows) # skip headers
     cost = 0
     for row_n, row in enumerate(rows, start = 1):
+        record = dict(zip(headers, row))
         # extract number of shares
         try:
-            shares = int(row[1])
+            shares = int(record['shares'])
             #extract price
-            price = float(row[2])
+            price = float(record['price'])
+            total = shares*price
+            cost += total
         except ValueError:
             print(f"Row {row_n}: Couldn\'t convert: {row}")
-        total = shares*price
-        cost += total
     f.close()
     return cost
 
