@@ -9,14 +9,14 @@ def portfolio_cost(filename):
     rows = csv.reader(f)
     next(rows) # skip headers
     cost = 0
-    for row in rows:
+    for row_n, row in enumerate(rows, start = 1):
         # extract number of shares
         try:
             shares = int(row[1])
             #extract price
             price = float(row[2])
         except ValueError:
-            print("Warning: Missing Field")
+            print(f"Row {row_n}: Couldn\'t convert: {row}")
         total = shares*price
         cost += total
     f.close()
