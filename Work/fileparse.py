@@ -2,7 +2,7 @@
 #
 # Exercise 3.3
 import csv
-def parse_csv(filename, select = None):
+def parse_csv(filename, select = None, types = [str, int, float]):
     '''
     Parse a CSV file into a list of record
     '''
@@ -20,7 +20,7 @@ def parse_csv(filename, select = None):
         for row in rows:
             if not row: #Skip rows with no data
                 continue
-            record = {col:row[ndx] for col,ndx in zip(select,indices)}
+            record = {col:func(row[ndx]) for col,ndx,func in zip(select,indices,types)}
             records.append(record)
     return records
  
