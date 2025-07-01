@@ -3,6 +3,7 @@
 # Exercise 1.27
 import csv
 import sys
+import report
 
 def portfolio_cost(filename):
     f = open(filename, 'rt')
@@ -28,7 +29,8 @@ if len(sys.argv) == 2:
     path = sys.argv[1]
 else:
     path = 'Data/portfolio.csv'
-total_cost = portfolio_cost(path)
+    
+total_cost = sum([d['shares']*d['price'] for d in report.read_portfolio('Data/portfolio.csv')])
 
 print('Total cost', total_cost)
 
