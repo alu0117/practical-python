@@ -2,6 +2,8 @@
 #
 # Exercise 2.4
 import csv
+import fileparse
+
 def read_portfolio(filename):
     portfolio = []
 
@@ -27,6 +29,7 @@ def read_prices(filename):
 
 def make_report(port, cur_prices):
     holdings = []
+    cur_prices = dict(cur_prices)
     for p in port:
         buy_price = p['price']
         cur_price = cur_prices[p['name']]
@@ -64,8 +67,8 @@ def print_report(report):
         print(f'{name:>10s} {shares:>10d} {formatted_price:>10s} {change:>10.2f}')
 
 def portfolio_report(portfolio_filename, prices_filename):
-    portfolio = read_portfolio('Data/portfolio.csv')
-    prices = read_prices('Data/prices.csv')
+    portfolio = fileparse.parse_csv('Data/portfolio.csv', select = ['name','shares','price'], has_headers = True)
+    prices = fileparse.parse_csv('Data/prices.csv', types = [str,float], has_headers =False)
     report = make_report(portfolio, prices)
     print_report(report)
             
