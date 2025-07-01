@@ -18,14 +18,18 @@ def parse_csv(filename, select = None, types = [str, int, float], has_headers = 
             else:
                 select = headers
         records = []
-        for row in rows:
+        for row_n, row in enumerate(rows, start = 1):
             record = None
             if not row: #Skip rows with no data
                 continue
-            if has_headers:
-                record = {col:func(row[ndx]) for col,ndx,func in zip(select,indices,types)}
-            else:
-                record = tuple([func(val) for func, val in zip(types,row)])
+            try:
+                if has_headers:
+                    record = {col:func(row[ndx]) for col,ndx,func in zip(select,indices,types)}
+                else:
+                    record = tuple([func(val) for func, val in zip(types,row)])
+            except ValueError as v:
+                print(f'Row {row_n}: Couldn\'t convert {row}')
+                print(f'Row {row_n}: Reason {v}')
             records.append(record)
     return records
  
