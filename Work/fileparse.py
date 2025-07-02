@@ -6,9 +6,6 @@ def parse_csv(f, select = None, types = [str, int, float], has_headers = True, d
     '''
     Parse a CSV file into a list of record
     '''
-    if isinstance(f, str):
-        f = open(f, 'rt')
-        
     if select and not has_headers:
         raise RuntimeError("select arguement requires column headers")
     
@@ -35,8 +32,6 @@ def parse_csv(f, select = None, types = [str, int, float], has_headers = True, d
                 print(f'Row {row_n}: Couldn\'t convert {row}')
                 print(f'Row {row_n}: Reason {v}')
         records.append(record)
-    if not f.close:
-        f.close()
     return records
  
 '''if __name__ == '__main__':

@@ -3,28 +3,18 @@
 # Exercise 2.4
 import csv
 import sys
-
+import fileparse
 def read_portfolio(filename):
-    portfolio = []
+    portfolio = None
 
     with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        headers = next(rows)
-        for row in rows:
-            record = dict(zip(headers,row))
-            portfolio.append({'name':record['name'], 'shares': int(record['shares']),'price': float(record['price'])})
+        portfolio = fileparse.parse_csv(f, types=[str, int, float])
     return portfolio
 
 def read_prices(filename):
-    d = {}
-    f = open(filename, 'rt')
-    rows = csv.reader(f)
-    for row in rows:
-        try:
-            d[row[0]] = float(row[1])
-        except IndexError:
-            print('Row is empty')
-    f.close()
+    with open(filename, 'rt') as f:
+        price_list = fileparse.parse_csv(f, types = [str,float], has_headers = False)
+    d = dict(price_list)
     return d
 
 def make_report(port, cur_prices):
@@ -79,4 +69,5 @@ def main(arguements):
     portfolio_report(portfile, pricefile)
 
 if __name__=='__main__':
-    main(sys.argv)
+    #main(sys.argv)
+    main(['report.py', 'Data/portfolio.csv','Data/prices.csv'])
