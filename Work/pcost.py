@@ -24,13 +24,12 @@ def portfolio_cost(filename):
     f.close()
     return cost
 
-path = ''
-if len(sys.argv) == 2:
-    path = sys.argv[1]
-else:
-    path = 'Data/portfolio.csv'
-    
-total_cost = sum([d['shares']*d['price'] for d in report.read_portfolio('Data/portfolio.csv')])
+def main(arguements):
+    if len(arguements) != 2:
+        raise SystemExit(f'Usage: {arguements[0]} ' 'portfile')
+    path = arguements[1]
+    total_cost = portfolio_cost(path)
+    print('Total cost', total_cost)
 
-print('Total cost', total_cost)
-
+if __name__=='__main__':
+    main(sys.argv)
