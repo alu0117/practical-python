@@ -24,11 +24,9 @@ def portfolio_cost(filename):
     return cost
 
 def main(arguements):
-    path = ''
-    if len(arguements) == 2:
-        path = arguements[1]
-    else:
-        path = 'Data/portfolio.csv'
+    if len(arguements) != 2:
+        raise SystemExit(f'Usage: {arguements[0]} ' 'portfile')
+    path = arguements[1]
     total_cost = portfolio_cost(path)
     print('Total cost', total_cost)
 

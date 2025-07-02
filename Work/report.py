@@ -72,6 +72,8 @@ def portfolio_report(portfolio_filename, prices_filename):
     print_report(report)
             
 def main(arguements):
+    if len(arguements) != 3:
+        raise SystemExit(f'Usage: {arguements[0]} ' 'portfolio pricefile')
     portfile = arguements[1]
     pricefile = arguements[2]
     portfolio_report(portfile, pricefile)
