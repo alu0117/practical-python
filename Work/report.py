@@ -2,6 +2,8 @@
 #
 # Exercise 2.4
 import csv
+import sys
+
 def read_portfolio(filename):
     portfolio = []
 
@@ -69,5 +71,10 @@ def portfolio_report(portfolio_filename, prices_filename):
     report = make_report(portfolio, prices)
     print_report(report)
             
-# Script begins here
-portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+def main(arguements):
+    portfile = arguements[1]
+    pricefile = arguements[2]
+    portfolio_report(portfile, pricefile)
+
+if __name__=='__main__':
+    main(sys.argv)

@@ -23,12 +23,14 @@ def portfolio_cost(filename):
     f.close()
     return cost
 
-path = ''
-if len(sys.argv) == 2:
-    path = sys.argv[1]
-else:
-    path = 'Data/portfolio.csv'
-total_cost = portfolio_cost(path)
+def main(arguements):
+    path = ''
+    if len(arguements) == 2:
+        path = arguements[1]
+    else:
+        path = 'Data/portfolio.csv'
+    total_cost = portfolio_cost(path)
+    print('Total cost', total_cost)
 
-print('Total cost', total_cost)
-
+if __name__=='__main__':
+    main(sys.argv)
